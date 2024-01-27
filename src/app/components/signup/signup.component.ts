@@ -69,8 +69,12 @@ export class SignupComponent implements OnInit {
       .subscribe({
         next: (res)=>{
           console.log("response on subscribe sign up next",res)
-          this.signUpForm.reset();
-          this.router.navigate(['login']);
+          if(res.success)
+          {
+            this.signUpForm.reset();
+            this.router.navigate(['login']);
+          }
+
         },
         error: (err)=>{
           console.log("error on subscribe sign up error",err)

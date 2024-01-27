@@ -58,8 +58,13 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res)=>{
           console.log("response on subscribe login next",res);
-          this.loginForm.reset();
-          this.router.navigate(['dashboard']);
+          if(res.success)
+          {
+            this.loginForm.reset();
+            this.router.navigate(['dashboard']);
+          }
+
+
         },
         error: (err)=>{
           console.log("error on subscribe login error",err)
