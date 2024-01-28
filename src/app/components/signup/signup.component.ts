@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import validateForm from 'src/app/helpers/validateFormFields';
 import { UserApiRequest } from 'src/app/models/userRequest';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private _formbuilder : UntypedFormBuilder,
               private _authsvc : AuthService,
-               private router: Router)
+               private router: Router,
+               private toast: NgToastService)
   {
     this.signUpForm = this._formbuilder.group({
 
@@ -68,16 +70,19 @@ export class SignupComponent implements OnInit {
       this._authsvc.onRegister(usrapiRequestbody)
       .subscribe({
         next: (res)=>{
-          console.log("response on subscribe sign up next",res)
           if(res.success)
           {
             this.signUpForm.reset();
+            this.toast.success({detail: "Success!", summary : res.message,duration : 5000 })
             this.router.navigate(['login']);
+          }else
+          {
+            this.toast.error({detail: "Error!", summary : res.message,duration : 5000 });
           }
 
         },
         error: (err)=>{
-          console.log("error on subscribe sign up error",err)
+          this.toast.error({detail: "Error!", summary : err.error.message,duration : 5000 });
         }
       })
 

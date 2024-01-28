@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, FormControl, UntypedFormGroup , Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 import validateForm from 'src/app/helpers/validateFormFields';
 import { UserApiRequest } from 'src/app/models/userRequest';
 import { AuthService } from 'src/app/services/auth.service';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private _fb: UntypedFormBuilder,
         private _authSvc : AuthService,
-        private router : Router)
+        private router : Router,
+        private toast: NgToastService)
   {
 
   }
@@ -61,13 +63,20 @@ export class LoginComponent implements OnInit {
           if(res.success)
           {
             this.loginForm.reset();
+            this.toast.success({detail: "Success!", summary : res.message,duration : 5000 })
             this.router.navigate(['dashboard']);
+          }else
+          {
+            this.toast.error({detail: "Error!", summary : res.message,duration : 5000 });
+
           }
 
 
         },
         error: (err)=>{
           console.log("error on subscribe login error",err)
+          this.toast.error({detail: "Error!", summary : err.error.message,duration : 5000 })
+
         }
       })
       // commit object
