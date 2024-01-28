@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import validateForm from 'src/app/helpers/validateFormFields';
 import { UserApiRequest } from 'src/app/models/userRequest';
@@ -15,9 +15,9 @@ export class SignupComponent implements OnInit {
   toggledPasswordtype : string = "password"
   isText: boolean = false
   passwordVisibilityIcon : string = "fa-eye-slash"
-  signUpForm! : FormGroup
+  signUpForm! : UntypedFormGroup
 
-  constructor(private _formbuilder : FormBuilder,
+  constructor(private _formbuilder : UntypedFormBuilder,
               private _authsvc : AuthService,
                private router: Router)
   {

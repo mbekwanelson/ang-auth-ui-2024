@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "ang-auth-ui-2024"
+  "cli": {
+    "analytics": "8cb3ac7e-9171-485b-89e5-899e777a0f80"
+  }
 }
