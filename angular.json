@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ang-auth-ui-2024:build:production"
+              "buildTarget": "ang-auth-ui-2024:build:production"
             },
             "development": {
-              "browserTarget": "ang-auth-ui-2024:build:development"
+              "buildTarget": "ang-auth-ui-2024:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ang-auth-ui-2024:build"
+            "buildTarget": "ang-auth-ui-2024:build"
           }
         },
         "test": {
